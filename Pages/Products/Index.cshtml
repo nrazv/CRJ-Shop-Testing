@@ -1,0 +1,85 @@
+﻿@page
+@using CRJ_Shop.Models
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model CRJ_Shop.Pages.Products.Index
+@attribute [Authorize(Roles = "Admin")]
+
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+
+<h1 class="text-left container my-5 fw-bold">Our products</h1>
+
+<div class=" my-5">
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-page="/products/create" class="btn btn-success ">Create new product</a>
+    }
+
+    <form method="get" class="d-flex justify-content-between  w-100 my-4 gap-2">
+        <div class="d-flex justify-content-between w-100 gap-2">
+            <select class="form-select w-25" id="selectedCategoryId"
+                    name="selectedCategoryId"
+                    onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                @foreach (var category in Model.Categories)
+                {
+                    <option value="@category.Id" selected="@(category.Id == Model.SelectedCategoryId ? "selected" : null)">
+                        @category.ProductCategory
+                    </option>
+                }
+            </select>
+                <input type="text"
+                       placeholder="Search"
+                       class="form-control"
+                       id="searchQuery"
+                       name="searchQuery"
+                       value="@Model.SearchQuery"
+                       onchange="this.form.submit()" />
+        </div>
+    </form>
+    <div class="row">
+        @foreach (var product in Model.ProductList)
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-2">
+                <div class="card h-100 pb-2">
+
+                    <a asp-page="/products/product" asp-route-id="@product.Id" class="card-body text-black text-decoration-none">
+                        <img src="@(!string.IsNullOrEmpty(product.Image) ? product.Image : "https://placehold.co/600x400")" class="w-100 mb-2" alt="Example image"/>
+                        <h4 class="fw-bold h6">@product.Name</h4>
+                        <div class="text-truncate">@product.Description</div>
+                    </a>
+
+                    <div class="px-3 d-flex justify-content-between align-items-center">
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <form method="post" asp-page="/cart" asp-page-handler="AddToCart">
+                                <input type="hidden" name="productId" value="@product.Id"/>
+                                <button type="submit" class="d-flex justify-content-center gap-2 btn btn-outline-dark py-1 h6 px-2 rounded-3 mt-1 mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                                        <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9z"/>
+                                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                                    </svg>
+                                    Add to cart
+                                </button>
+                            </form>
+                        }
+                        <span class="h5 fw-bold font-monospace">@product.Price SEK</span>
+                    </div>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div class="d-flex flex-column gap-2 px-3">
+                            <a asp-page="/products/edit" asp-route-id="@product.Id" class="btn btn-secondary">Edit</a>
+                            <a asp-page="/products/details" asp-route-id="@product.Id" class="btn btn-outline-primary">Details</a>
+                            <a asp-page="/products/delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

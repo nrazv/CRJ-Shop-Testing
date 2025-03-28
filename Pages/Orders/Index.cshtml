@@ -1,0 +1,88 @@
+﻿@page
+@model CRJ_Shop.Pages.Order.IndexModel
+@{
+}
+
+
+
+@if (Model.Orders != null && Model.Orders.Count > 0) {
+    <div>
+        @foreach (var order in Model.Orders)
+        {
+            <div id="accordion">
+                <div class="card m-3">
+                    <div class="card-header" id="@order.Id">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#@order.OrderNumber" aria-expanded="true" aria-controls="@order.OrderNumber">
+                                Order Number #@order.OrderNumber
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="@order.OrderNumber" class="collapse show" aria-labelledby="@order.Id" data-parent="#accordion">
+                        <div class="card-body">
+                            <h5>Status: @order.Status</h5>
+                            <h5>Order Date: @order.OrderDate</h5>
+
+                            <table class="table mb-5">
+                                <thead>
+                                    <tr class="h6">
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Price per</th>
+                                        <th>Tot Price</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in @order.Products)
+                                    {
+                                        <tr>
+                                            <td class="">@product.Product?.Name</td>
+                                            <td class="font-monospace">x @product.Quantity</td>
+                                            <td class="font-monospace">@product.Product!.Price:-</td>
+                                            @if (product.Quantity < 1)
+                                            {
+                                                <td class="font-monospace">@product.Product.Price:-</td>
+                                            }
+                                            else
+                                            {
+                                                <td class="font-monospace">@(product.Product.Price * product.Quantity):-</td>
+                                            }
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-end flex-column gap-2">
+                                <span class="d-flex justify-content-end fw-bold h4 font-monospace">
+                                    Total: @order.TotalPrice  SEK
+                                </span>
+                            </div>
+                            @if (order.Status != Models.OrderStatus.Cancelled)
+                            {
+                                <div class="d-flex justify-content-end">
+                                    <form method="post" asp-route-id="@order.Id">
+                                        <button type="submit" class="btn btn-danger">Cancel Order</button>
+                                    </form>
+                                </div>
+                            }
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+} else {
+    <div class="d-flex justify-content-center">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <p class="lead">Nothing for now &#x1F60A;</p>
+            </div>
+        </div>
+    </div>
+}
+

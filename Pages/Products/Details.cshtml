@@ -1,0 +1,34 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization
+@model CRJ_Shop.Pages.Products.DetailsModel
+@attribute [Authorize(Roles = "Admin")]
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="fw-bold mt-4">Details</h1>
+
+<div class="my-4 d-flex">
+    <div class="w-100">
+        <div>
+            <h4 class="text-decoration-underline">Name</h4>
+            <p>@Model.Product.Name</p>
+        </div>
+        <div>
+            <h4 class="text-decoration-underline">Description</h4>
+            <p class="w-50">@Model.Product.Description</p>
+        </div>
+        <div>
+            <h4 class="text-decoration-underline">Price</h4>
+            <p class="font-monospace h3">@Model.Product.Price SEK</p>
+        </div>
+    </div>
+    <div>
+        <img src="@Model.Product.Image" class="w-100" alt="image"/>
+    </div>
+</div>
+<div class="form-group my-4">
+    <a class="btn btn-secondary" asp-page="./Edit" asp-route-id="@Model.Product.Id">Edit</a>
+    <a class="btn btn-danger" asp-page="./Index">Cancel</a>
+</div>

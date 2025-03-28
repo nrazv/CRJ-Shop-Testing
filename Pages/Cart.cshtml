@@ -1,0 +1,62 @@
+﻿@page
+@model CRJ_Shop.Pages.CartModel
+@{
+}
+
+<div class="container my-5">
+    <h2>Your Cart</h2>
+    @if (Model.CartItem != null && Model.CartItem.Count > 0)
+    {
+        <table class="table mb-5">
+            <thead>
+            <tr class="h6">
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price per</th>
+                <th>Tot Price</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.CartItem)
+            {
+                <tr>
+                    <td class="">@item.Product?.Name</td>
+                    <td class="font-monospace">x @item.Quantity</td>
+                    <td class="font-monospace">@item.Product!.Price:-</td>
+                    @if (item.Quantity < 1)
+                    {
+                        <td class="font-monospace">@item.Product.Price:-</td>
+                    }
+                    else
+                    {
+                        <td class="font-monospace">@(item.Product.Price * item.Quantity):-</td>
+                    }
+
+                    <td>
+                        <form method="post" asp-page-handler="RemoveFromCart" class="d-flex justify-content-end">
+                            <input type="hidden" name="itemId" value="@item.Id"/>
+                            <button type="submit" class="text-danger border-0 fw-bold bg-transparent rounded-pill">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end flex-column gap-2">
+            <span class="d-flex justify-content-end fw-bold h4 font-monospace">
+                Total: @Model.CartItem.Sum(x => x.Product.Price * x.Quantity) SEK
+            </span>
+            <div class="d-flex justify-content-end">
+                <a asp-page="Orders/Preview" class="d-flex btn btn-success"> Go to checkout</a>
+            </div>
+
+            <a href='javascript:history.go(-1)' class="mb-5">&#10094; Continue shopping</a>
+        </div>
+    }
+    else
+    {
+        <p>Your cart is empty.</p>
+        <a href="/products" class="mb-5">&#10094; Continue shopping</a>
+    }
+</div>
