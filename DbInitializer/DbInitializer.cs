@@ -1,7 +1,6 @@
 ﻿using CRJ_Shop.Data;
 using CRJ_Shop.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRJ_Shop.DbInitializer;

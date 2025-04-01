@@ -1,5 +1,6 @@
 ﻿using CRJ_Shop.Data;
 using CRJ_Shop.Models;
+using CRJ_Shop.Services.Products;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,14 +11,16 @@ namespace CRJ_Shop.Pages.Products
     public class CreateModel : PageModel
     {
         private readonly AppDbContext _context;
+        private readonly IProductService _productService;
 
-        public CreateModel(AppDbContext context)
+        public CreateModel(AppDbContext context, IProductService productService)
         {
+            _productService = productService;
             _context = context;
         }
 
         [BindProperty]
-       public Product Product { get; set; } 
+        public Product Product { get; set; }
 
         [BindProperty] public AvailableCategories SelectedCategory { get; set; } // Bind selected category
 

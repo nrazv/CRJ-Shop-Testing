@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRJ_Shop.Repositories;
 
-public class Repository<T> : IRepository<T> where T : class
+public abstract class Repository<T> : IRepository<T> where T : class
 {
     private readonly AppDbContext _appDbContext;
     private DbSet<T> dbSet;
@@ -15,9 +15,9 @@ public class Repository<T> : IRepository<T> where T : class
     }
 
 
-    public void Add(T entity)
+    public async Task Add(T entity)
     {
-        dbSet.Add(entity);
+        await dbSet.AddAsync(entity);
     }
 
     public void Delete(T entity)
@@ -30,16 +30,23 @@ public class Repository<T> : IRepository<T> where T : class
         dbSet.RemoveRange(values);
     }
 
-    public T Get(Expression<Func<T, bool>> filter)
+    public async Task<T> Get(Expression<Func<T, bool>> filter)
     {
         IQueryable<T> query = dbSet;
         query = query.Where(filter);
-        return query.FirstOrDefault();
+        return await query.FirstOrDefaultAsync();
     }
 
-    public IEnumerable<T> GetAll()
+    public async Task<IEnumerable<T>> GetAll()
     {
         IQueryable<T> query = dbSet;
-        return query.ToList();
+        return await query.ToListAsync();
+    }
+
+    public async Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> filter)
+    {
+        IQueryable<T> query = dbSet;
+        query = query.Where(filter);
+        return await query.ToListAsync();
     }
 }

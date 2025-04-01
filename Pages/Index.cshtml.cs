@@ -1,7 +1,9 @@
 using CRJ_Shop.Data;
 using CRJ_Shop.Models;
+using CRJ_Shop.Repositories.Categories;
+using CRJ_Shop.Services.Categories;
+using CRJ_Shop.Services.Products;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,60 +14,45 @@ public class IndexModel : PageModel
     private readonly UserManager<AppUser> _userManager;
     private readonly IUserStore<AppUser> _userStore;
     private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly AppDbContext dbContext;
+    private readonly IProductService _productService;
+    private readonly ICategoryService _categoryService;
 
-
+    public IndexModel(UserManager<AppUser> userManager, IUserStore<AppUser> userStore, RoleManager<IdentityRole> roleManager, IProductService productService, ICategoryService categoryService)
+    {
+        _userManager = userManager;
+        _userStore = userStore;
+        _roleManager = roleManager;
+        _productService = productService;
+        _categoryService = categoryService;
+    }
 
     public List<Product> ProductList { get; set; }
     public List<Category> Categories { get; set; }
     public string SearchQuery { get; set; }
     public int? SelectedCategoryId { get; set; }
-    // Konstruktor
-    public IndexModel(
-            AppDbContext dbContext,
-            UserManager<AppUser> userManager,
-            IUserStore<AppUser> userStore,
-            RoleManager<IdentityRole> roleManager)
-    {
-        this.dbContext = dbContext;
-        _userManager = userManager;
-        _userStore = userStore;
-        _roleManager = roleManager;
 
-
-    }
 
     public async Task OnGet(string searchQuery, int? selectedCategoryId)
     {
-        Categories = await dbContext.Categories.ToListAsync();
+        Categories = await _categoryService.GetAll();
+        ProductList = await _productService.GetAll();
 
-        // Show prodcts based on what you search for, and what category you select
-        var productsQuery = dbContext.Products.AsQueryable();
 
         if (!string.IsNullOrEmpty(searchQuery))
         {
-            productsQuery = productsQuery.Where(p => p.Name.Contains(searchQuery));
-            SearchQuery = searchQuery;
+            ProductList = await _productService.GetWhere(p => p.Name.Contains(searchQuery));
         }
 
-        // Category filter
         if (selectedCategoryId.HasValue)
         {
-            var selectedCategory = await dbContext.Categories
-                .FirstOrDefaultAsync(c => c.Id == selectedCategoryId);
+            var category = await _categoryService.GetById(selectedCategoryId.Value);
 
-            if (selectedCategory != null)
+            if (category != null)
             {
-                productsQuery = productsQuery.Where(p => p.ProductCategories
-                    .Any(pc => pc.Category.ProductCategory == selectedCategory.ProductCategory));
-                SelectedCategoryId = selectedCategoryId; // Persist the selected category ID
+                ProductList = await _productService.GetWhere(p => p.ProductCategories.Any(c => c.CategoryId == category.Id));
             }
         }
 
-        // Fetch the filtered product list
-        ProductList = await productsQuery.ToListAsync();
     }
-
-
 
 }

@@ -4,9 +4,10 @@ namespace CRJ_Shop.Repositories;
 
 public interface IRepository<T> where T : class
 {
-    IEnumerable<T> GetAll();
-    T Get(Expression<Func<T, bool>> filter);
-    void Add(T entity);
+    Task<IEnumerable<T>> GetAll();
+    Task<T> Get(Expression<Func<T, bool>> filter);
+    Task<IEnumerable<T>> GetWhere(Expression<Func<T, bool>> filter);
+    Task Add(T entity);
     void Delete(T entity);
     void DeleteRange(IEnumerable<T> values);
 }
