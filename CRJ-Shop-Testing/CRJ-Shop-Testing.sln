@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRJ-Shop-Testing", "CRJ-Sho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit-Testing", "..\Unit-Testing\Unit-Testing.csproj", "{D19525C1-771C-49F4-B200-B55F19C920E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E2ETesting", "..\E2E-Testing\E2ETesting.csproj", "{36B0D8D7-99E7-F210-ABCA-3375FAFA2C67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D19525C1-771C-49F4-B200-B55F19C920E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D19525C1-771C-49F4-B200-B55F19C920E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D19525C1-771C-49F4-B200-B55F19C920E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36B0D8D7-99E7-F210-ABCA-3375FAFA2C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36B0D8D7-99E7-F210-ABCA-3375FAFA2C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36B0D8D7-99E7-F210-ABCA-3375FAFA2C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36B0D8D7-99E7-F210-ABCA-3375FAFA2C67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
