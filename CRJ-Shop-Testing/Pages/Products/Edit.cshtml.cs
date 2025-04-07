@@ -13,9 +13,9 @@ namespace CRJ_Shop.Pages.Products
 {
     public class EditModel : PageModel
     {
-        private readonly CRJ_Shop.Data.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public EditModel(CRJ_Shop.Data.AppDbContext context)
+        public EditModel(AppDbContext context)
         {
             _context = context;
         }

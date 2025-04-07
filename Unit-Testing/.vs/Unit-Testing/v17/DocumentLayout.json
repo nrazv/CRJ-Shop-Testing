@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\peter\\Documents\\GitHub\\CRJ-Test\\Unit-Testing\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{32FFA30A-F915-1A48-0829-9555E8AC3F86}|Unit-Testing.csproj|c:\\users\\peter\\documents\\github\\crj-test\\unit-testing\\productservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32FFA30A-F915-1A48-0829-9555E8AC3F86}|Unit-Testing.csproj|solutionrelative:productservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{32FFA30A-F915-1A48-0829-9555E8AC3F86}|Unit-Testing.csproj|c:\\users\\peter\\documents\\github\\crj-test\\unit-testing\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{32FFA30A-F915-1A48-0829-9555E8AC3F86}|Unit-Testing.csproj|solutionrelative:unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -23,12 +27,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ProductServiceTests.cs",
+              "DocumentMoniker": "C:\\Users\\peter\\Documents\\GitHub\\CRJ-Test\\Unit-Testing\\ProductServiceTests.cs",
+              "RelativeDocumentMoniker": "ProductServiceTests.cs",
+              "ToolTip": "C:\\Users\\peter\\Documents\\GitHub\\CRJ-Test\\Unit-Testing\\ProductServiceTests.cs",
+              "RelativeToolTip": "ProductServiceTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-04T05:20:01.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "UnitTest1.cs",
               "DocumentMoniker": "C:\\Users\\peter\\Documents\\GitHub\\CRJ-Test\\Unit-Testing\\UnitTest1.cs",
               "RelativeDocumentMoniker": "UnitTest1.cs",
               "ToolTip": "C:\\Users\\peter\\Documents\\GitHub\\CRJ-Test\\Unit-Testing\\UnitTest1.cs",
               "RelativeToolTip": "UnitTest1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-03T19:26:07.385Z",
               "EditorCaption": ""

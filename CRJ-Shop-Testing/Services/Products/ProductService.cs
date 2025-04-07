@@ -14,26 +14,37 @@ public class ProductService : IProductService
         _repository = repository;
     }
 
-    public Task<bool> Delete(Product entity)
+    public Task<bool> AddNew(Product entity)
     {
+
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteAll(IEnumerable<Product> values)
+    public async Task<bool> Delete(Product entity)
+
     {
-        throw new NotImplementedException();
+        _repository.Delete(entity);
+        var affectedRows = await _repository.SaveChanges();
+        return affectedRows >= 1;
+    }
+
+    public async Task<bool> DeleteAll(IEnumerable<Product> values)
+    {
+        _repository.DeleteRange(values);
+        var affectedRows = await _repository.SaveChanges();
+        return affectedRows >= 1;
     }
 
     public async Task<List<Product>> GetAll()
     {
-        var list = await _repository.GetAll();
+        var list = await _repository.GetAll() ?? new List<Product>();
 
         return list.ToList();
     }
 
-    public Task<Product> GetById(int Id)
+    public async Task<Product> GetById(int Id)
     {
-        throw new NotImplementedException();
+        return await _repository.Get(p => p.Id == Id);
     }
 
     public async Task<List<Product>> GetWhere(Expression<Func<Product, bool>> filter)

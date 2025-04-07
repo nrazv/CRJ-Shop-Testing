@@ -13,6 +13,11 @@ public class CategoryService : ICategoryService
         this.repository = categoryRepository;
     }
 
+    public Task<bool> AddNew(Category entity)
+    {
+        throw new NotImplementedException();
+    }
+
     public bool Delete(Category entity)
     {
         throw new NotImplementedException();

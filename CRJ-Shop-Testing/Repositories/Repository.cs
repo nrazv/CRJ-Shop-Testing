@@ -49,4 +49,9 @@ public abstract class Repository<T> : IRepository<T> where T : class
         query = query.Where(filter);
         return await query.ToListAsync();
     }
+
+    public async Task<int> SaveChanges()
+    {
+        return await _appDbContext.SaveChangesAsync();
+    }
 }
