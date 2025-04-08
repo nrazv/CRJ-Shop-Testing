@@ -10,7 +10,7 @@ public static class ProductTestData
 
         yield return new object[]
         {
-                new Product(){
+            new Product(){
             Id = 1,
             Description = "Product Description",
             Image = "http://image.com",

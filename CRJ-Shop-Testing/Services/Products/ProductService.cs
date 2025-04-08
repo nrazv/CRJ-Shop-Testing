@@ -53,11 +53,6 @@ public class ProductService : IProductService
         return list.ToList();
     }
 
-    public Task<Product> Save(Product entity)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<Product> Update(Product entity)
     {
         throw new NotImplementedException();

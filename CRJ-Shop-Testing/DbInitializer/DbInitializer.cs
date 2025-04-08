@@ -20,6 +20,12 @@ public class DbInitializer
 
     public async Task InitializeDb()
     {
+        var testUser = await _userManager.FindByEmailAsync("test@gmail.com");
+        if (testUser is not null)
+        {
+
+            await _userManager.DeleteAsync(testUser);
+        }
         try
         {
             if (_dbContext.Database.GetPendingMigrations().Count() > 0)

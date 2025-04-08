@@ -7,12 +7,12 @@
 
 <form method="post" class="d-flex flex-column gap-2 w-50 mx-auto">
 	<label class="form-label">Email</label>
-	<input class="form-control" type="email" asp-for="Email" required/>
+	<input data-testid="email" class="form-control" type="email" asp-for="Email" required />
 	
 	<label class="form-label">Password</label>
-	<input class="form-control" type="password" asp-for="Password" required/>
+	<input data-testid="password" class="form-control" type="password" asp-for="Password" required />
 	
-	<button class="btn btn-outline-dark" type="submit">Log in</button>
+	<button data-testid="loginButton" class="btn btn-outline-dark" type="submit">Log in</button>
 </form>
 
 <span class="text-center mx-auto w-100 d-block my-2"> 

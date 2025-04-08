@@ -2,6 +2,7 @@
 using CRJ_Shop.Repositories.Products;
 using CRJ_Shop.Services.Products;
 using Moq;
+using System.Linq.Expressions;
 
 
 namespace Unit_Testing;
@@ -81,5 +82,21 @@ public class ProductServiceTests
         Assert.Contains(result, p => p.Name == "Product One");
         productsRepositoryMock.Verify(r => r.GetAll(), Times.Once());
     }
+
+    [Theory]
+    [MemberData(nameof(ProductTestData.ProductTestInstance), MemberType = typeof(ProductTestData))]
+
+    public async Task GetById_ReturnsProductWhitIdOne(Product product)
+    {
+        productsRepositoryMock.Setup(r => r.Get(It.IsAny<Expression<Func<Product, bool>>>())).ReturnsAsync(product);
+        var result = await productService.GetById(1);
+
+        productsRepositoryMock.Verify(r => r.Get(It.IsAny<Expression<Func<Product, bool>>>()), Times.Once());
+        Assert.NotNull(result);
+        Assert.Equal(1, result.Id);
+        Assert.Same(result, product);
+    }
+
+
 
 }

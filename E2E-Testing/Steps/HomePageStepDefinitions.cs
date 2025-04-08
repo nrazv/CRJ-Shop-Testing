@@ -2,7 +2,7 @@ using Microsoft.Playwright;
 using System;
 using TechTalk.SpecFlow;
 
-namespace E2ETesting;
+namespace E2ETesting.Steps;
 
 [Binding]
 public class HomePageStepDefinitions
@@ -16,7 +16,7 @@ public class HomePageStepDefinitions
     public async Task Setup()
     {
         _playwright = await Playwright.CreateAsync();
-        _browser = await _playwright.Chromium.LaunchAsync(new() { Headless = false, SlowMo = 200 });
+        _browser = await _playwright.Chromium.LaunchAsync(new() { Headless = false });
         _context = await _browser.NewContextAsync();
         _page = await _context.NewPageAsync();
     }
@@ -27,7 +27,6 @@ public class HomePageStepDefinitions
         await _browser.CloseAsync();
         _playwright.Dispose();
     }
-
 
     [Given(@"I am on the home page")]
     public async Task GivenIAmOnTheHomePage()
@@ -44,4 +43,16 @@ public class HomePageStepDefinitions
 
         Assert.Equal(pageTitle, title);
     }
+
+
+    [Given(@"I should see more the (.*) product")]
+    public async Task GivenIShouldSeeMoreTheProduct(int p0)
+    {
+        await _page.GotoAsync("http://localhost:5000/");
+
+        var products = await _page.QuerySelectorAllAsync("[data-testid='product']");
+        Assert.True(products.Count > p0, "Expected more than one product on the page.");
+    }
+
+
 }

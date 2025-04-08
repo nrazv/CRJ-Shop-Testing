@@ -32,7 +32,7 @@
     <div class="row">
         @foreach(var product in Model.ProductList)
         {
-            <div class="col-sm-6 col-md-4 col-lg-3 mb-2">
+            <div data-testid="product" class="col-sm-6 col-md-4 col-lg-3 mb-2">
                 <div class="card h-100 pb-2">
                     <a asp-page="/products/product" asp-route-id="@product.Id" class="card-body text-black text-decoration-none">
                         <img src="@(!string.IsNullOrEmpty(product.Image) ? product.Image : "https://placehold.co/600x400")" class="w-100 mb-2" alt="Example image" />

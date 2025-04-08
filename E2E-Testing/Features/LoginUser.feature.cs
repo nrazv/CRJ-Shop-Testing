@@ -19,7 +19,7 @@ namespace E2ETesting.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "4.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class HomePageFeature : object, Xunit.IClassFixture<HomePageFeature.FixtureData>, Xunit.IAsyncLifetime
+    public partial class LoginUserFeature : object, Xunit.IClassFixture<LoginUserFeature.FixtureData>, Xunit.IAsyncLifetime
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace E2ETesting.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "HomePage.feature"
+#line 1 "LoginUser.feature"
 #line hidden
         
-        public HomePageFeature(HomePageFeature.FixtureData fixtureData, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public LoginUserFeature(LoginUserFeature.FixtureData fixtureData, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
         }
@@ -39,7 +39,7 @@ namespace E2ETesting.Features
         public static async System.Threading.Tasks.Task FeatureSetupAsync()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunnerForAssembly(null, TechTalk.SpecFlow.xUnit.SpecFlowPlugin.XUnitParallelWorkerTracker.Instance.GetWorkerId());
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "HomePage", "A short summary of the feature", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "LoginUser", "A short summary of the feature", ProgrammingLanguage.CSharp, featureTags);
             await testRunner.OnFeatureStartAsync(featureInfo);
         }
         
@@ -86,14 +86,14 @@ namespace E2ETesting.Features
             await this.TestTearDownAsync();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Home Page")]
-        [Xunit.TraitAttribute("FeatureTitle", "HomePage")]
-        [Xunit.TraitAttribute("Description", "Home Page")]
-        public async System.Threading.Tasks.Task HomePage()
+        [Xunit.SkippableFactAttribute(DisplayName="Login the new user")]
+        [Xunit.TraitAttribute("FeatureTitle", "LoginUser")]
+        [Xunit.TraitAttribute("Description", "Login the new user")]
+        public async System.Threading.Tasks.Task LoginTheNewUser()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Home Page", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login the new user", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -105,13 +105,19 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 6
- await testRunner.GivenAsync("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ await testRunner.GivenAsync("I\'m on the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- await testRunner.AndAsync("Title should be \"Home page - CRJ_Shop\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ await testRunner.WhenAsync("I enter \"test@gmail.com\" as the email of the new user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- await testRunner.AndAsync("I should see more the 1 product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ await testRunner.AndAsync("I enter \"Password123!\" as the password of the new user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 9
+ await testRunner.AndAsync("I submit the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 10
+ await testRunner.ThenAsync("I should be redirected to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -124,12 +130,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             async System.Threading.Tasks.Task Xunit.IAsyncLifetime.InitializeAsync()
             {
-                await HomePageFeature.FeatureSetupAsync();
+                await LoginUserFeature.FeatureSetupAsync();
             }
             
             async System.Threading.Tasks.Task Xunit.IAsyncLifetime.DisposeAsync()
             {
-                await HomePageFeature.FeatureTearDownAsync();
+                await LoginUserFeature.FeatureTearDownAsync();
             }
         }
     }
